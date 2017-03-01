@@ -10,6 +10,9 @@
 </head>
 <body>
 	<div class="container">
+		<header id="header">
+			<input data-bind="value: currentFilter, valueUpdate: 'afterkeydown', enterKey: filter" id="search" placeholder="Filter Recommendations" autofocus>
+		</header>
 		<div class="listView">
 			<ul data-bind="foreach: recommendList">
 				<li data-bind="text: name"></li>

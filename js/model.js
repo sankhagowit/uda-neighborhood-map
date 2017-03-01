@@ -10,7 +10,7 @@ var Recommendation = function(data) {
 	this.types = ko.observable(data.types);
 	this.geometry = ko.observable(data.geometry.location);
 	// Okay I'm not sure how hiding things will go but I'm going to add this visible property anyways
-	this.visible = true;
+	this.visible = ko.observable(true);
 	//with the place ID in hand, I could go ahead and create a function to do
 	// a Place details search and populate the recommendation inside of this constructor
 };
