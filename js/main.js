@@ -70,16 +70,15 @@ var ViewModel = function(){
 	model.results.forEach(function(result){
 		self.recommendList.push(new Recommendation(result));
 	});
-
+	this.filterOptions = ko.observable(["bar", "restaurant"]);
 	this.currentFilter = ko.observable();
-
 	// Idea/syntax for code below to use a computed observable array for the list of
 	// filtered places from the from Knockout TodoMVC example
 	this.filteredRecommendations = ko.computed(function() {
-		return this.recommendList().filter(function (rec) {
+		return self.recommendList().filter(function (rec) {
 			return rec.visible();
 		});
-	}.bind(this)); // what in the world is the .bind
+	}); // what in the world is the .bind
 	// think its time to read some documentation.
 
 	// alright, I need a filter function which takes the search input and
@@ -89,6 +88,7 @@ var ViewModel = function(){
 		console.log('Filter using '+this.currentFilter());
 		// Use the currentFilter() to determine which locations should have their
 		// visible property set to false.
+
 	};
 
 };
