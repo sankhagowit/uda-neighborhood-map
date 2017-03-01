@@ -11,7 +11,9 @@
 <body>
 	<div class="container">
 		<div class="listView">
-			ListView
+			<ul data-bind="foreach: recommendList">
+				<li data-bind="text: name"></li>
+			</ul>
 		</div>
 		<div class="map">
 			Map

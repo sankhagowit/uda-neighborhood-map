@@ -4,6 +4,15 @@ var Recommendation = function(data) {
 	// data = model.results[i]..
 	// could this also be a AJAX request? Am I missing something here on how
 	// Google Maps and AJAX Connects?
+	this.name = ko.observable(data.name);
+	this.placeID = ko.observable(data.place_id);
+	this.icon = ko.observable(data.icon);
+	this.types = ko.observable(data.types);
+	this.geometry = ko.observable(data.geometry.location);
+	// Okay I'm not sure how hiding things will go but I'm going to add this visible property anyways
+	this.visible = true;
+	//with the place ID in hand, I could go ahead and create a function to do
+	// a Place details search and populate the recommendation inside of this constructor
 };
 
 var model = {
