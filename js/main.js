@@ -75,19 +75,25 @@ var ViewModel = function(){
 	// Idea/syntax for code below to use a computed observable array for the list of
 	// filtered places from the from Knockout TodoMVC example
 	this.filteredRecommendations = ko.computed(function() {
-		return self.recommendList().filter(function (rec) {
+		return ko.utils.arrayFilter(self.recommendList(), function (rec) {
 			return rec.visible();
 		});
-	}); // what in the world is the .bind
-	// think its time to read some documentation.
+	});
+
 
 	// alright, I need a filter function which takes the search input and
 	// sets the visible property of each recommend list to false, then it should
 	// automatically update the list once I point the view to the filtered list.
 	this.filter = function () {
-		console.log('Filter using '+this.currentFilter());
-		// Use the currentFilter() to determine which locations should have their
-		// visible property set to false.
+		var searchTerm = this.currentFilter().trim();
+		ko.utils.arrayFilter(self.recommendList(), function(rec) {
+			rec.visible(true);
+		});
+		if (searchTerm) {
+			//start filtering
+			//name
+			//type can I do a find or something?
+		}
 
 	};
 

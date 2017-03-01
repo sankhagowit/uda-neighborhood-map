@@ -1,0 +1,17 @@
+#place-list {
+	padding: 0;
+	list-style:none;
+	width: 75%;
+	border: 1px solid;
+}
+
+#place-list li {
+	padding: 5px;
+	position: relative;
+	border-bottom: 1px solid;
+	text-align: center;
+}
+
+#place-list li:last-child {
+	border-bottom: none;
+}
