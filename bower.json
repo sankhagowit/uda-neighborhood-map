@@ -1,0 +1,30 @@
+{
+  "name": "houston-map",
+  "description": "Udacity Neighborhood Map Project",
+  "main": "index.js",
+  "authors": [
+    "Bobby Sankhagowit"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Neighborhood",
+    "Map",
+    "Udacity",
+    "Project",
+    "Houston"
+  ],
+  "homepage": "https://github.com/sankhagowit/uda-neighborhood-map",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "knockout": "^3.4.1"
+  }
+}

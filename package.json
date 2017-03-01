@@ -25,5 +25,6 @@
   "homepage": "https://github.com/sankhagowit/uda-neighborhood-map#readme",
   "devDependencies": {
     "gulp": "^3.9.1"
-  }
+  },
+  "dependencies": {}
 }

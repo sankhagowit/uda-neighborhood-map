@@ -1,12 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-framework="knockoutjs">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Downtown Houston Map</title>
+	<link async rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+	<link async rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	
+	<div class="container">
+		<div class="listView">
+
+		</div>
+		<div class="map">
+
+		</div>
+	</div>
+	<!-- load jQuery ... Everything async right? -->
+	<script async src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script async src="js/bootstrap/bootstrap.min.js"></script>
+	<script async src="js/knockout.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBUr8Sn4xX5Mh0ijZRWwUm1Zji_LpV8TjQ&v=3&callback=initMap"></script>
+	<script async src="js/map.js"></script>
+	<script async src="js/main.js"></script>
 </body>
 </html>
