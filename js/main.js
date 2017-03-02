@@ -70,33 +70,46 @@ var ViewModel = function(){
 	model.results.forEach(function(result){
 		self.recommendList.push(new Recommendation(result));
 	});
-	this.filterOptions = ko.observable(["bar", "restaurant"]);
+
 	this.currentFilter = ko.observable();
-	// Idea/syntax for code below to use a computed observable array for the list of
-	// filtered places from the from Knockout TodoMVC example
-	this.filteredRecommendations = ko.computed(function() {
+	// Idea/syntax for code below to use a computed observable array for the list of filtered places from the from Knockout TodoMVC example
+	this.filteredList = ko.computed(function() {
 		return ko.utils.arrayFilter(self.recommendList(), function (rec) {
 			return rec.visible();
 		});
 	});
 
-
-	// alright, I need a filter function which takes the search input and
-	// sets the visible property of each recommend list to false, then it should
-	// automatically update the list once I point the view to the filtered list.
 	this.filter = function () {
-		var searchTerm = this.currentFilter().trim();
-		ko.utils.arrayFilter(self.recommendList(), function(rec) {
-			rec.visible(true);
-		});
-		if (searchTerm) {
-			//start filtering
-			//name
-			//type can I do a find or something?
+		// create variable for search term, make it lower case
+		// will use indexOf() which is case sensitive
+		var searchTerm = this.currentFilter().trim().toLowerCase();
+		// If the searchTerm is not an empty string, lets search
+		if(searchTerm) {
+			// Looping through each object in the recommendList observable array
+			ko.utils.arrayFilter(self.recommendList(), function(rec) {
+				//Rec is our recommendation object. Set visible to false/hidden, if this object contains any part of the search string we will set it to true in the loops
+				rec.visible(false);
+				var name = rec.name().toLowerCase();
+				var types = rec.types();
+				var setVisible = false;
+				types.forEach(function(type){
+					if(type.toLowerCase().indexOf(searchTerm) >= 0){
+						setVisible = true;
+					}
+				});
+				if (name.indexOf(searchTerm) >= 0){
+					setVisible = true;
+				}
+				// If the search term was found in the loops,
+				if(setVisible){rec.visible(true);}
+			});
+		} else {
+			// If searchTerm is empty string reset the whole list to visible
+			ko.utils.arrayFilter(self.recommendList(), function(rec){
+				rec.visible(true);
+			});
 		}
-
 	};
-
 };
 
 // Initalize View Model

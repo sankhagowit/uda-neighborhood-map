@@ -14,7 +14,7 @@
 			<input data-bind="value: currentFilter, valueUpdate: 'afterkeydown', enterKey: filter" id="search" placeholder="Filter Recommendations" autofocus>
 		</header>
 		<div class="listView">
-			<ul id="place-list" data-bind="foreach: recommendList">
+			<ul id="place-list" data-bind="foreach: filteredList">
 				<li data-bind="text: name"></li>
 			</ul>
 		</div>
