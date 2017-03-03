@@ -72,6 +72,9 @@ var ViewModel = function(){
 	});
 
 	this.currentFilter = ko.observable();
+	this.currentFilter.subscribe(function(){
+		self.filter();
+	});
 	// Idea/syntax for code below to use a computed observable array for the list of filtered places from the from Knockout TodoMVC example
 	this.filteredList = ko.computed(function() {
 		return ko.utils.arrayFilter(self.recommendList(), function (rec) {

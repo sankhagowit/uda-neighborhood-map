@@ -10,14 +10,28 @@
 </head>
 <body>
 	<div class="container">
-		<header id="header" class="form-group row">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#listView" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<input class="navbar-brand" type="search" data-bind="value: currentFilter, valueUpdate: 'afterkeydown'" id="search" placeholder="Filter Recommendations">
+				</div>
+			</div>
+		</nav>
+
+		<!-- <header id="header" class="form-group row">
 			<div class="form-group col-xs-10">
 				<input class="form-control" type="search" data-bind="value: currentFilter, valueUpdate: 'afterkeydown', enterKey: filter" id="search" placeholder="Filter Recommendations">
 			</div>
 				<button type="button" class="col-xs-2 btn btn-default" aria-label="Align Justify">
 					<span class="glyphicon glyphicon-align-justify"></span>
 				</button>
-		</header>
+		</header> -->
 		<div class="listView">
 			<ul id="place-list" data-bind="foreach: filteredList">
 				<li data-bind="text: name"></li>
@@ -27,9 +41,7 @@
 			Map
 		</div>
 	</div>
-	<!-- <input type="checkbox"> -->
-	<!-- <select data-bind="options: types"/> -->
-	<!-- load jQuery ... Everything async right? -->
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script async src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script async src="bower_components/knockout/dist/knockout.js"></script>
