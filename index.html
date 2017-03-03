@@ -24,7 +24,7 @@
 
 				<div class="collapse navbar-collapse" id="listView">
 					<ul class="nav navbar-nav" id="place-list" data-bind="foreach: filteredList">
-						<li data-bind="text: name"></li>
+						<li data-bind="text: name, click: $parent.clicked, css: { clicked: clicked() === true}"></li>
 					</ul>
 				</div>
 
@@ -44,9 +44,7 @@
 				<li data-bind="text: name"></li>
 			</ul>
 		</div> -->
-		<div class="map">
-			map
-		</div>
+		<div class="map"></div>
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

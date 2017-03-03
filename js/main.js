@@ -5,10 +5,8 @@
 	var ENTER_KEY = 13;
 	var ESCAPE_KEY = 27;
 
-	// All code below involving keyhandling and binding handling taken from
-	// todomvc knockout js example.
-	// A factory function we can use to create binding handlers for specific
-	// keycodes.
+	// All code below involving keyhandling and binding handling taken from todomvc knockout js example.
+	// A factory function we can use to create binding handlers for specific keycodes.
 	function keyhandlerBindingFactory(keyCode) {
 		return {
 			init: function (element, valueAccessor, allBindingsAccessor, data, bindingContext) {
@@ -63,7 +61,6 @@ var ViewModel = function(){
 	var self = this;
 
 	// Create collection to hold our Recommendations from the model
-	// the Model is currently a static list in the model variable
 	this.recommendList = ko.observableArray([]);
 
 	// Push all static model data into ko observable array
@@ -113,6 +110,14 @@ var ViewModel = function(){
 			});
 		}
 	};
+
+	// Method to change the clicked property of a recommendation
+	this.clicked = function(rec) {
+		var current_state = rec.clicked();
+		rec.clicked(!current_state);
+		//console.log(rec.name()+" Clicked");
+	};
+
 };
 
 // Initalize View Model
