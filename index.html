@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Downtown Houston Map</title>
-	<link async rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link async rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="container">
@@ -21,6 +21,13 @@
 					</button>
 					<input class="navbar-brand" type="search" data-bind="value: currentFilter, valueUpdate: 'afterkeydown'" id="search" placeholder="Filter Recommendations">
 				</div>
+
+				<div class="collapse navbar-collapse" id="listView">
+					<ul class="nav navbar-nav" id="place-list" data-bind="foreach: filteredList">
+						<li data-bind="text: name"></li>
+					</ul>
+				</div>
+
 			</div>
 		</nav>
 
@@ -32,13 +39,13 @@
 					<span class="glyphicon glyphicon-align-justify"></span>
 				</button>
 		</header> -->
-		<div class="listView">
+		<!-- <div class="listView">
 			<ul id="place-list" data-bind="foreach: filteredList">
 				<li data-bind="text: name"></li>
 			</ul>
-		</div>
+		</div> -->
 		<div class="map">
-			Map
+			map
 		</div>
 	</div>
 
