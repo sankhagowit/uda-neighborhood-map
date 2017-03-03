@@ -5,13 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Downtown Houston Map</title>
-	<link async rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+	<link async rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link async rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<div class="container">
-		<header id="header">
-			<input data-bind="value: currentFilter, valueUpdate: 'afterkeydown', enterKey: filter" id="search" placeholder="Filter Recommendations" autofocus>
+		<header id="header" class="form-group row">
+			<div class="form-group col-xs-10">
+				<input class="form-control" type="search" data-bind="value: currentFilter, valueUpdate: 'afterkeydown', enterKey: filter" id="search" placeholder="Filter Recommendations">
+			</div>
+				<button type="button" class="col-xs-2 btn btn-default" aria-label="Align Justify">
+					<span class="glyphicon glyphicon-align-justify"></span>
+				</button>
 		</header>
 		<div class="listView">
 			<ul id="place-list" data-bind="foreach: filteredList">
@@ -26,8 +31,8 @@
 	<!-- <select data-bind="options: types"/> -->
 	<!-- load jQuery ... Everything async right? -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script async src="js/bootstrap/bootstrap.min.js"></script>
-	<script async src="js/knockout.js"></script>
+	<script async src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script async src="bower_components/knockout/dist/knockout.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBUr8Sn4xX5Mh0ijZRWwUm1Zji_LpV8TjQ&v=3&callback=initMap"></script>
 	<script async src="js/map.js"></script>
 	<script async src="js/model.js"></script>
