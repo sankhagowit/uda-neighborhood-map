@@ -8,7 +8,7 @@ var Recommendation = function(data) {
 	this.placeID = ko.observable(data.place_id);
 	this.icon = ko.observable(data.icon);
 	this.types = ko.observable(data.types);
-	this.geometry = ko.observable(data.geometry.location);
+	this.location = ko.observable(data.geometry.location);
 	// Okay I'm not sure how hiding things will go but I'm going to add this visible property anyways
 	this.visible = ko.observable(true);
 	this.clicked = ko.observable(false);
