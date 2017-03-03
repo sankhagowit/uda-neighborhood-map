@@ -64,8 +64,8 @@ var ViewModel = function(){
 	this.recommendList = ko.observableArray([]);
 
 	// Push all static model data into ko observable array
-	model.results.forEach(function(result){
-		self.recommendList.push(new Recommendation(result));
+	model.results.forEach(function(result,index){
+		self.recommendList.push(new Recommendation(result,index));
 	});
 
 	this.currentFilter = ko.observable();
@@ -89,6 +89,7 @@ var ViewModel = function(){
 			ko.utils.arrayFilter(self.recommendList(), function(rec) {
 				//Rec is our recommendation object. Set visible to false/hidden, if this object contains any part of the search string we will set it to true in the loops
 				rec.visible(false);
+				markers[rec.index()].setVisible(false);
 				var name = rec.name().toLowerCase();
 				var types = rec.types();
 				var setVisible = false;
@@ -101,7 +102,10 @@ var ViewModel = function(){
 					setVisible = true;
 				}
 				// If the search term was found in the loops,
-				if(setVisible){rec.visible(true);}
+				if(setVisible){
+					rec.visible(true);
+					markers[rec.index()].setVisible(true);
+				}
 			});
 		} else {
 			// If searchTerm is empty string reset the whole list to visible
@@ -115,7 +119,11 @@ var ViewModel = function(){
 	this.clicked = function(rec) {
 		var current_state = rec.clicked();
 		rec.clicked(!current_state);
-		//console.log(rec.name()+" Clicked");
+		if(!current_state){
+			markers[rec.index()].setIcon(highlightedIcon);
+		} else {
+			markers[rec.index()].setIcon(defaultIcon);
+		}
 	};
 
 };

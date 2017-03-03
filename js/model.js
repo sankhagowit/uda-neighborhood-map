@@ -1,4 +1,4 @@
-var Recommendation = function(data) {
+var Recommendation = function(data,index) {
 	// this is my recommendation/place class.
 	// I will be passing from google place search (perhaps)
 	// data = model.results[i]..
@@ -12,6 +12,7 @@ var Recommendation = function(data) {
 	// Okay I'm not sure how hiding things will go but I'm going to add this visible property anyways
 	this.visible = ko.observable(true);
 	this.clicked = ko.observable(false);
+	this.index = ko.observable(index);
 	//with the place ID in hand, I could go ahead and create a function to do
 	// a Place details search and populate the recommendation inside of this constructor
 };
