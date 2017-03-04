@@ -58,7 +58,10 @@ function populateInfoWindow(marker, infowindow) {
 			infowindow.marker = null;
 	});
 	// Open the infowindow on the correct marker.
+	// okay lets go ahead and figure out this yelp API and populate this infoWindow.
 	infowindow.setContent('<div>' + marker.title + '</div>');
+
+
 	infowindow.open(map, marker);
 	}
 }

@@ -17,6 +17,19 @@ var Recommendation = function(data,index) {
 	// a Place details search and populate the recommendation inside of this constructor
 };
 
+var jso = new JSO({
+	providerID: "yelp",
+	client_id: "zZye2ASIHsyL-n2pzkVvew",
+	authorization: "Bearer EIe7EsoPfscOIzt0kSm2GxhbOAfF-OUzCQ-Xa94-Sn1dDiul5_6KStKqDvZE6_uF3jKg3bVFELZAsIBkRs-ZY4NjOq3XWZmVmnC-E1GtVQVdEqUNWWN_1jaZ1PS5WHYx",
+});
+
+//yelp
+// {
+//   "token_type": "Bearer",
+//   "expires_in": 15551999,
+//   "access_token": "EIe7EsoPfscOIzt0kSm2GxhbOAfF-OUzCQ-Xa94-Sn1dDiul5_6KStKqDvZE6_uF3jKg3bVFELZAsIBkRs-ZY4NjOq3XWZmVmnC-E1GtVQVdEqUNWWN_1jaZ1PS5WHYx"
+// }
+
 var model = {
     "html_attributions": [],
     "next_page_token": "CpQCAgEAAHhtNkKbqeNaIpYzkP135SMmdDxNEc4plLvUhootpTjvlq5RywOpKyL8z6EIAxoshDlGPXf_Gpy2LYPhSeBRZmAjMLQWLlY40Ah5LouU--x3vpTPxpJ9rvvhaqjneDM8FPJ5k6ph7NnQTp5pn-6K5H7Wpdz9ACrTjyzn9arzgCuNCZNCoMZ6xvKDbzQWRK5nSPTm9A8Sq-OwsaBbJupjg5KWClaH0ZZ2FBQc8G7t7OKh-trwQdbxj_si7Kz9uRCKk3C7GXsLkaxUIRS--imRdxw9QJqlW45R37KMCqtocXxv9MeTma7tfOF0yxQ1q4e8SefvE7K7xguj4IhNXO67tL0cBfyWz2gr7Jn9kQM9ucZYEhA67JR6YyzhD0N3_-ApX8IDGhRxft9IB9PhHk91S4KGaiUYkuOcgA",
