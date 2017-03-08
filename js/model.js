@@ -69,7 +69,7 @@ var yelpData = function (name, location, cb){
 		'cache': true
 	})
 		.done(function(data, textStatus, jqXHR) {
-			console.log('success[' + data + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
+			//console.log('success[' + data + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
 			cb(data);
 		})
 		.fail(function(jqXHR, textStatus, errorThrown) {
