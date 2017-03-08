@@ -29,7 +29,8 @@ function initMap() {
 			title: result.name,
 			animation: google.maps.Animation.DROP,
 			icon: defaultIcon,
-			id: index
+			id: index,
+			test: result.geometry.location
 		});
 		markers.push(marker);
 
@@ -59,10 +60,22 @@ function populateInfoWindow(marker, infowindow) {
 	});
 	// Open the infowindow on the correct marker.
 	// okay lets go ahead and figure out this yelp API and populate this infoWindow.
-	infowindow.setContent('<div>' + marker.title + '</div>');
+	var ll = marker.test.lat+','+marker.test.lng;
 
+	yelpData(marker.title,ll,function(yelp){
 
-	infowindow.open(map, marker);
+		if(yelp){
+			infowindow.setContent(
+				'<div style="text-align: center;"><h5>'+ marker.title + '</h5><img src=' + yelp.businesses[0].image_url + '>' + '</div>'
+			);
+		} else {
+			infowindow.setContent(
+				'<div style="text-align: center;"><h5>'+ marker.title + '</h5><p>error fetching yelp picture</p>' + '</div>'
+			);
+		}
+
+		infowindow.open(map, marker);
+	});
 	}
 }
 

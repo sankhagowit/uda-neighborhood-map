@@ -29,9 +29,9 @@ var auth = {
 };
 
 // Function below takes the name of an establishment and the lat,lng location and performs a yelp ajax request. Only returns one, the most 'relevent' item that is returned.
-var yelpData = function (name, location){
-	var terms = 'Bovine & Barley';
-	var location = '29.761133,-95.361722';
+var yelpData = function (name, location, cb){
+	var terms = name;
+	var location = location;
 
 	var accessor = {
 		consumerSecret: auth.consumerSecret,
@@ -53,14 +53,14 @@ var yelpData = function (name, location){
 		'method': 'GET',
 		'parameters': parameters
 	};
-	console.log(message.action);
+	//console.log(message.action);
 
 	OAuth.setTimestampAndNonce(message);
 	OAuth.SignatureMethod.sign(message, accessor);
 
 	var parameterMap = OAuth.getParameterMap(message.parameters);
-	console.log(parameterMap);
-
+	//console.log(parameterMap);
+	var request = {};//{imgurl: ""};
 	$.ajax({
 		'url': message.action,
 		'data': parameterMap,
@@ -69,13 +69,12 @@ var yelpData = function (name, location){
 		'cache': true
 	})
 		.done(function(data, textStatus, jqXHR) {
-			console.log(data);
-			//console.log('success[' + data + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
-			return data;
+			console.log('success[' + data + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
+			cb(data);
 		})
 		.fail(function(jqXHR, textStatus, errorThrown) {
 			console.log('error[' + errorThrown + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
-			return false;
+			cb(false);
 		});
 };
 
