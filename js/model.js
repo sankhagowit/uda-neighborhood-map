@@ -28,54 +28,56 @@ var auth = {
 	serviceProvider: {signatureMethod: 'HMAC-SHA1'}
 };
 
-function yelp(name, location){
+// Function below takes the name of an establishment and the lat,lng location and performs a yelp ajax request. Only returns one, the most 'relevent' item that is returned.
+var yelpData = function (name, location){
+	var terms = 'Bovine & Barley';
+	var location = '29.761133,-95.361722';
 
-}
+	var accessor = {
+		consumerSecret: auth.consumerSecret,
+		tokenSecret: auth.accessTokenSecret
+	};
 
-var terms = 'Bovine & Barley';
-var location = '29.761133,-95.361722';
+	var parameters = [];
+	parameters.push(['term', terms]);
+	parameters.push(['ll', location]);
+	parameters.push(['limit', '1']);
+	parameters.push(['callback', 'cb']);
+	parameters.push(['oauth_consumer_key', auth.consumerKey]);
+	parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
+	parameters.push(['oauth_token', auth.accessToken]);
+	parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
 
-var accessor = {
-	consumerSecret: auth.consumerSecret,
-	tokenSecret: autho.accessTokenSecret
-};
+	var message = {
+		'action': 'https://api.yelp.com/v2/search',
+		'method': 'GET',
+		'parameters': parameters
+	};
+	console.log(message.action);
 
-var parameters = [];
-parameters.push(['term', terms]);
-parameters.push(['ll', location]);
-parameters.push(['oauth_consumer_key', auth.consumerKey]);
-parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
-parameters.push(['oauth_token', auth.accessToken]);
-parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
-parameters.push(['callback', cb]);
+	OAuth.setTimestampAndNonce(message);
+	OAuth.SignatureMethod.sign(message, accessor);
 
-var message = {
-	'action': 'https://api.yelp.com/v2/search?',
-	'method': 'GET',
-	'parameters': parameters
-};
-console.log(message.action);
+	var parameterMap = OAuth.getParameterMap(message.parameters);
+	console.log(parameterMap);
 
-OAuth.setTimestampAndNonce(message);
-OAuth.signatureMethod.sign(message, accessor);
-
-var parameterMap = OAuth.getParameterMap(message.parameters);
-console.log(parameterMap);
-
-$.ajax({
-	'url': message.action,
-	'data': parameterMap,
-	'dataType': 'jsonp',
-	'jsonpCallback': 'cb',
-	'async': 'false',
-	'cache': true
-})
-	.done(function(data, textStats, XMLHttpRequest) {
-		console.log(data);
+	$.ajax({
+		'url': message.action,
+		'data': parameterMap,
+		'dataType': 'jsonp',
+		'jsonpCallback': 'cb',
+		'cache': true
 	})
-	.fail(function(jqXHR, textStatus, errorThrown) {
-		console.log('error[' + errorThrown + ']');
-	});
+		.done(function(data, textStatus, jqXHR) {
+			console.log(data);
+			//console.log('success[' + data + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
+			return data;
+		})
+		.fail(function(jqXHR, textStatus, errorThrown) {
+			console.log('error[' + errorThrown + '], status[' + textStatus + '], jqXHR[' + JSON.stringify(jqXHR) + ']');
+			return false;
+		});
+};
 
 // var jso = new JSO({
 // 	providerID: "yelp",
