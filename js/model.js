@@ -17,11 +17,71 @@ var Recommendation = function(data,index) {
 	// a Place details search and populate the recommendation inside of this constructor
 };
 
-var jso = new JSO({
-	providerID: "yelp",
-	client_id: "zZye2ASIHsyL-n2pzkVvew",
-	authorization: "Bearer EIe7EsoPfscOIzt0kSm2GxhbOAfF-OUzCQ-Xa94-Sn1dDiul5_6KStKqDvZE6_uF3jKg3bVFELZAsIBkRs-ZY4NjOq3XWZmVmnC-E1GtVQVdEqUNWWN_1jaZ1PS5WHYx",
-});
+// I've been struggling to make the yelp api request work, from my research online, it seems that making a request requiring Oauth2 from clientside javascript is not an encouraged practice. I stumbled across the following code in this github issue discussion https://github.com/Yelp/yelp-api/issues/99
+// Also I am using yelp api v2 which is only Oauth1, not sure that one can even make the javascript request using v3. fyi students wont be able to sign up for v2 after april 1st 2017
+
+var auth = {
+	consumerKey: 'imbGMl5m7H9J10hAZddqJw',
+	consumerSecret: '5RhUMDWit7lbiTl8qbnJfkCbRZ0',
+	accessToken: 'aD7mXgyX9Do8cXKXks6EQ7ama4Td6G4g',
+	accessTokenSecret: 'I9OlDtXLYIPAcuxi3WUt9dpkoLM',
+	serviceProvider: {signatureMethod: 'HMAC-SHA1'}
+};
+
+function yelp(name, location){
+
+}
+
+var terms = 'Bovine & Barley';
+var location = '29.761133,-95.361722';
+
+var accessor = {
+	consumerSecret: auth.consumerSecret,
+	tokenSecret: autho.accessTokenSecret
+};
+
+var parameters = [];
+parameters.push(['term', terms]);
+parameters.push(['ll', location]);
+parameters.push(['oauth_consumer_key', auth.consumerKey]);
+parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
+parameters.push(['oauth_token', auth.accessToken]);
+parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
+parameters.push(['callback', cb]);
+
+var message = {
+	'action': 'https://api.yelp.com/v2/search?',
+	'method': 'GET',
+	'parameters': parameters
+};
+console.log(message.action);
+
+OAuth.setTimestampAndNonce(message);
+OAuth.signatureMethod.sign(message, accessor);
+
+var parameterMap = OAuth.getParameterMap(message.parameters);
+console.log(parameterMap);
+
+$.ajax({
+	'url': message.action,
+	'data': parameterMap,
+	'dataType': 'jsonp',
+	'jsonpCallback': 'cb',
+	'async': 'false',
+	'cache': true
+})
+	.done(function(data, textStats, XMLHttpRequest) {
+		console.log(data);
+	})
+	.fail(function(jqXHR, textStatus, errorThrown) {
+		console.log('error[' + errorThrown + ']');
+	});
+
+// var jso = new JSO({
+// 	providerID: "yelp",
+// 	client_id: "zZye2ASIHsyL-n2pzkVvew",
+// 	authorization: "Bearer EIe7EsoPfscOIzt0kSm2GxhbOAfF-OUzCQ-Xa94-Sn1dDiul5_6KStKqDvZE6_uF3jKg3bVFELZAsIBkRs-ZY4NjOq3XWZmVmnC-E1GtVQVdEqUNWWN_1jaZ1PS5WHYx",
+// });
 
 //yelp
 // {
