@@ -73,7 +73,7 @@ function populateInfoWindow(marker, infowindow) {
 				'<div style="text-align: center;"><h5>'+ marker.title + '</h5><p>error fetching yelp picture</p>' + '</div>'
 			);
 		}
-
+		//ViewModel.clicked(ViewModel.recommendList()[marker.id]);
 		infowindow.open(map, marker);
 	});
 	}

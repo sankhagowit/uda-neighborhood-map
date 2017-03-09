@@ -118,15 +118,19 @@ var ViewModel = function(){
 	// Method to change the clicked property of a recommendation
 	this.clicked = function(rec) {
 		var current_state = rec.clicked();
+		ko.utils.arrayFilter(self.recommendList(), function(obj) {
+			obj.clicked(false);
+		});
+		markers.forEach(function(marker){marker.setIcon(defaultIcon);});
 		rec.clicked(!current_state);
 		if(!current_state){
 			markers[rec.index()].setIcon(highlightedIcon);
-		} else {
-			markers[rec.index()].setIcon(defaultIcon);
+			google.maps.event.trigger(markers[rec.index()], 'click');
 		}
 	};
 
 };
 
 // Initalize View Model
-ko.applyBindings(new ViewModel());
+var ViewModel = new ViewModel();
+ko.applyBindings(ViewModel);
