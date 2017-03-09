@@ -115,21 +115,32 @@ var ViewModel = function(){
 		}
 	};
 
-	// Method to change the clicked property of a recommendation
-	this.clicked = function(rec) {
-		var current_state = rec.clicked();
+	// this.markerColorReset = function(rec){
+	// 	markers.forEach(function(marker){marker.setIcon(defaultIcon);});
+	// 	markers[rec.id].setIcon(highlightedIcon);
+	// };
+
+	this.clickedPropertyReset = function (){
 		ko.utils.arrayFilter(self.recommendList(), function(obj) {
 			obj.clicked(false);
 		});
+	};
+
+	// Method to change the clicked property of a recommendation
+	this.clicked = function(rec) {
+		var current_state = rec.clicked();
+		self.clickedPropertyReset();
 		markers.forEach(function(marker){marker.setIcon(defaultIcon);});
-		rec.clicked(!current_state);
 		if(!current_state){
-			markers[rec.index()].setIcon(highlightedIcon);
 			google.maps.event.trigger(markers[rec.index()], 'click');
 		}
 	};
 
 };
+
+function googleError() {
+	alert("Whoops! There is an issue loading the map");
+}
 
 // Initalize View Model
 var ViewModel = new ViewModel();

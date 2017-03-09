@@ -35,6 +35,9 @@ function initMap() {
 		markers.push(marker);
 
 		marker.addListener('click', function(){
+			marker.setAnimation(google.maps.Animation.BOUNCE);
+			ViewModel.clickedPropertyReset();
+			map.panTo(marker.getPosition());
 			populateInfoWindow(this, largeInfoWindow);
 		});
 		marker.addListener('mouseover', function() {
@@ -50,6 +53,7 @@ function initMap() {
 
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
+	markers.forEach(function(marker){marker.setIcon(defaultIcon);});
 	if (infowindow.marker != marker) {
 		// Clear the infowindow content to give the streetview time to load.
 		infowindow.setContent('');
@@ -57,6 +61,7 @@ function populateInfoWindow(marker, infowindow) {
 		// Make sure the marker property is cleared if the infowindow is closed.
 		infowindow.addListener('closeclick', function() {
 			infowindow.marker = null;
+			ViewModel.clickedPropertyReset();
 	});
 	// Open the infowindow on the correct marker.
 	// okay lets go ahead and figure out this yelp API and populate this infoWindow.
@@ -73,7 +78,8 @@ function populateInfoWindow(marker, infowindow) {
 				'<div style="text-align: center;"><h5>'+ marker.title + '</h5><p>error fetching yelp picture</p>' + '</div>'
 			);
 		}
-		//ViewModel.clicked(ViewModel.recommendList()[marker.id]);
+		ViewModel.recommendList()[marker.id].clicked(true);
+		marker.setAnimation(null);
 		infowindow.open(map, marker);
 	});
 	}
@@ -98,4 +104,6 @@ function showMarkers(){
 		bounds.extend(markers[i].position);
 	}
 	map.fitBounds(bounds);
+	google.maps.event.addDomListener(window, 'resize', function() {
+		map.fitBounds(bounds);});
 }
